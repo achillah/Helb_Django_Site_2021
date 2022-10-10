@@ -1,0 +1,13 @@
+<div class="dropdown">
+    <span class="badge bg-primary notification-badge" onclick="showNotifications()">{{ notifications.count }}</span>
+    <div class="dropdown-content d-none" id="notification-container">
+        {% for notification in notifications %}
+        {% if notification.thread %}
+            <div class="dropdown-item-parent">
+                <a href="{% url 'thread-notification' notification.pk notification.thread.pk %}">{{ notification.from_user }} sent you a message</a>
+                <span class="dropdown-item-close" onclick="removeNotification(`{% url 'notification-delete' notification.pk %}`, `{{ request.path }}`)">&times;</span>
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+</div>

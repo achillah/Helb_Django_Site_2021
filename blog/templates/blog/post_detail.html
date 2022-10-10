@@ -1,0 +1,38 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+            <small class="text-muted">{{ object.date_posted|date:"F d, Y"}}</small>
+            <div>
+            {% if object.author == user%}
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+            {% endif %}
+
+                     <a href="{% url 'favourite_add' post.id %}" class="btn btn-outline-primary"> Add to WatchList </a>
+            </div>
+        </div>
+        <h2 class="article-title">{{ object.title }}</h2>
+        <p class="article-content">{{ object.content }}</p>
+        <div>
+                    <p class="article-price">Price : {{ post.price }} €</p>
+                    <p class="article-locality">Locality : {{ post.locality }}</p>
+                    <p class="article-Type_of_property">Type of property : {{ post.Type_of_property }}</p>
+                    <p class="article-superficy">Superficy : {{ post.superficy}}m²</p>
+            <div>
+                {% if post.image %}
+                   <img  class="rounded-circle account-img" src=" {{ post.image.url}}">
+                    {% endif %}
+            </div>
+
+            <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-localisation' %}">Localisation</a>
+
+
+        </div>
+
+    </div>
+</article>
+{% endblock content %}
